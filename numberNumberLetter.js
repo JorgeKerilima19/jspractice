@@ -1,5 +1,9 @@
 const test1 = "24z6 1x23 y369 89a 900b";
 
+const test2 = "10a 90x 14b 78u 45a 7b 34y";
+
+const test3 = "24z6 1z23 y369 89z 900b";
+
 const numberNumberLetter = (string) => {
   const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -44,11 +48,10 @@ const numberNumberLetter = (string) => {
   let count = 0;
 
   let result = cleanArray[0];
-  let length = cleanArray.length;
 
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < cleanArray.length - 1; i++) {
     let operation = operations[count];
-    let nextNumber = cleanArray[count + 1];
+    let nextNumber = cleanArray[i + 1];
 
     switch (operation) {
       case "+":
@@ -64,13 +67,15 @@ const numberNumberLetter = (string) => {
         result = result / nextNumber;
         break;
     }
-    if (count === operations.length) {
+    result = Math.ceil(result);
+    count++;
+
+    if (!operations[count]) {
       count = 0;
     }
-
-    count++;
   }
 
   return result;
 };
-numberNumberLetter(test1);
+
+console.log(numberNumberLetter(test3));
